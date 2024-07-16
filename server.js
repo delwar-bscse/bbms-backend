@@ -1,20 +1,30 @@
 import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import morgan from 'morgan';
+import colors from 'colors';
+
+import testRouter from './routes/testRoutes.js';
+
+//dot config
+dotenv.config();
 
 //rest object
 const app = express();
 
+//middlewares
+app.use(cors());
+app.use(express.json());
+app.use(morgan('dev'))
+
 //routes
 //1 test route
-app.get("/", (req,res)=>{
-  res.status(200).json({
-    message: "Welcome to Blood Bank App"
-  })
-})
+app.use("/api/v1/test", testRouter)
 
 //port
-const PORT = 8080;
+const PORT = process.env.PORT || 5000;
 
 //listen
 app.listen(PORT, ()=>{
-  console.log("Node server is running");
+  console.log(`Node server is running in ${process.env.DEV_MODE} mode on port ${PORT}`.bgBlue.white);
 })
