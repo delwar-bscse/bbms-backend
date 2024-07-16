@@ -5,9 +5,13 @@ import morgan from 'morgan';
 import colors from 'colors';
 
 import testRouter from './routes/testRoutes.js';
+import connectDB from './config/db.js';
 
 //dot config
 dotenv.config();
+
+//mongodb connection
+connectDB();
 
 //rest object
 const app = express();
