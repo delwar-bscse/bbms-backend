@@ -4,12 +4,12 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: [true, "Role is required"],
-    enum: ['user','admin','organization','hospital']
+    enum: ['donar','admin','organization','hospital']
   },
   name: {
     type: String,
     required: function(){
-      if(this.role === 'user' || this.role === 'admin'){
+      if(this.role === 'donar' || this.role === 'admin'){
         return true;
       }else{
         return false;
@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Address is required"]
   },
-  Phone: {
+  phone: {
     type: String,
     required: [true, "Phone is required"]
   },
